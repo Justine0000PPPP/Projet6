@@ -1,21 +1,22 @@
-app.use('/api/stuff', (req, res, next) => {
-  const stuff = [
-    {
-      _id: 'oeihfzeoi',
-      title: 'Mon premier objet',
-      description: 'Les infos de mon premier objet',
-      imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-      price: 4900,
-      userId: 'qsomihvqios',
-    },
-    {
-      _id: 'oeihfzeomoihi',
-      title: 'Mon deuxième objet',
-      description: 'Les infos de mon deuxième objet',
-      imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-      price: 2900,
-      userId: 'qsomihvqios',
-    },
-  ];
-  res.status(200).json(stuff);
-});
+const express = require('express');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/user');  // à créer plus tard
+const bookRoutes = require('./routes/book');  // à créer plus tard
+
+const app = express();
+
+app.use(express.json());  // pour parser le JSON des requêtes
+
+// Connexion MongoDB Atlas (remplace <PASSWORD> et <dbname>)
+mongoose.connect('mongodb+srv://JustineF:<Pepette2020>@cluster0-pme76.mongodb.net/monvieuxgrimoire?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Connexion à MongoDB réussie !'))
+.catch(error => console.error('Connexion à MongoDB échouée :', error));
+
+// Routes de l’API
+app.use('/api/users', userRoutes);
+app.use('/api/books', bookRoutes);
+
+module.exports = app;
