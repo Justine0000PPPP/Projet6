@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(error => console.error('Connexion à MongoDB échouée :', error));
 
 // Routes de l'API
-app.use('/api/users', userRoutes);
+app.use('/api/auth', userRoutes);
 app.use('/api/books', bookRoutes);
 
 module.exports = app;

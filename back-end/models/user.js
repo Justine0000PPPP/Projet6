@@ -1,12 +1,8 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator'); // Pour garantir l'unicité de l'email
+const express = require('express');
+const router = express.Router();
+const userController = require('../controleur/controleur-user');
 
-const userSchema = mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
+router.post('/signup', userController.signup);
+router.post('/login', userController.login);
 
-// Applique le plugin pour gérer les erreurs d'unicité
-userSchema.plugin(uniqueValidator); 
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = router;
