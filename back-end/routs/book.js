@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../models/book');
-const auth = require('../midd/auth'); // middleware auth
+const Book = require('../models/model-books');
+const auth = require('../midd/auth'); 
 const multer = require('../midd/multer-config'); // Multer pour l'upload
 const sharp = require('sharp');
 const fs = require('fs');
