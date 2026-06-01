@@ -1,26 +1,28 @@
-// Charger les variables d'environnement
 require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path'); // ajouter en haut avec les autres requires
-const userRoutes = require('./routs/user');  // routes utilisateurs
-const bookRoutes = require('./routs/book');  // routes livres
+const cors = require('cors');
+const path = require('path');
+
+const userRoutes = require('./routs/user');
+const bookRoutes = require('./routs/book');
 
 const app = express();
 
-// Middleware pour parser le JSON
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-// Servir le dossier images pour que le front puisse y accéder
+// Images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// Connexion à MongoDB
+// Connexion MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(error => console.error('Connexion à MongoDB échouée :', error));
 
-// Routes de l'API
+// Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/books', bookRoutes);
 
