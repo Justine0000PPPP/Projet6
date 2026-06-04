@@ -146,3 +146,14 @@ exports.addRating = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.getBestRatedBooks = async (req, res) => {
+  try {
+    const books = await Book.find()
+      .sort({ averageRating: -1 })
+      .limit(3);
+
+    res.status(200).json(books);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
