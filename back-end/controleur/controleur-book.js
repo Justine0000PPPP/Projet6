@@ -1,4 +1,4 @@
-const Book = require('../models/models-books');
+const Book = require('../models/model-books');
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');

@@ -10,7 +10,7 @@ const bookRoutes = require('./routes/book');
 
 const app = express();
 
-// Middlewares
+// Middlewares 
 app.use(cors());
 app.use(express.json());
 
